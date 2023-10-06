@@ -45,9 +45,9 @@ int main()
         cout << endl
              << "------------- Track " << track << endl;
 
-        // accelerate the car
         for (int carNum = 0; carNum < cars.size(); carNum++)
         {
+            // all the cars change their gears to 5 by the time they reach track 2
             if (track == 2)
             {
                 cars[carNum]->shift(5);
@@ -64,23 +64,21 @@ int main()
                 pedals += 1;
             }
             cout << "Car Speed: " << cars[carNum]->getSpeed() << " mph Gear: " << cars[carNum]->getGear() << endl;
-
-            // all the cars change their gear to 5 by the time they reach track 2
         }
 
-        // randomly brake a car, shift the gear and accelerate
+        // randomly brake two cars and shift their gears to 8 to speed up
         int randomCar = 1;
         while (track >= 2 && randomCar <= 2)
         {
             int randomIndex = rand() % 4;
             cars[randomIndex]->brake();
             cars[randomIndex]->shift(8);
-            cars[randomIndex]->pedal();
             cout << cars[randomIndex]->model << " is braking. Shifted gear to " << cars[randomIndex]->getGear() << " Car speed: " << cars[randomIndex]->getSpeed() << "mph" << endl;
             randomCar += 1;
         }
     }
 
+    // deallocate memory to free up space
     for (int carNum = 0; carNum < cars.size(); carNum++)
     {
         delete cars[carNum];
