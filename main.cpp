@@ -38,9 +38,9 @@ int main()
 
     cout << "Launching all the cars! Gear set to 1!" << endl;
 
-    int racingTracks = 5;
+    int laps = 5;
 
-    for (int track = 1; track <= racingTracks; track++)
+    for (int track = 1; track <= laps; track++)
     {
         cout << endl
              << "------------- Track " << track << endl;

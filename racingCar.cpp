@@ -99,7 +99,7 @@ void Car::startEngine(){
 }
 
 // change the gear when needed
-// gear can be shifted between 1 and 8 in racing cars
+// suppose gear can be shifted between 1 and 8 in racing cars
 void Car::shift(int newGear)
 {
     if (newGear >= 1 && newGear <= 8)
