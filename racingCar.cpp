@@ -26,6 +26,7 @@ Vehicle::~Vehicle() {}
 
 // accelerate the car
 // there is a speed limit for every gear which is tracked using maxGearSpeed, which is initialized to 0
+// updated top speed for each gear to suit racing car functionality
 void Car::pedal()
 {
     int maxGearSpeed = 0;
@@ -33,18 +34,27 @@ void Car::pedal()
     switch (gear)
     {
     case 1:
-        maxGearSpeed = 10;
+        maxGearSpeed = 60;
         break;
     case 2:
-        maxGearSpeed = 20;
+        maxGearSpeed = 75;
         break;
     case 3:
-        maxGearSpeed = 30;
+        maxGearSpeed = 90;
         break;
     case 4:
-        maxGearSpeed = 40;
+        maxGearSpeed = 110;
         break;
     case 5:
+        maxGearSpeed = 125;
+        break;
+    case 6:
+        maxGearSpeed = 135;
+        break;
+    case 7:
+        maxGearSpeed = 150;
+        break;
+    case 8:
         maxGearSpeed = maxCarSpeed;
         break;
     default:
@@ -55,11 +65,10 @@ void Car::pedal()
     if (speed < maxGearSpeed)
     {
         speed += 10;
-        cout << "Accelerate --> Car speed : " << getSpeed() << " Gear : " << getGear() << endl;
     }
     else
     {
-        throw "Tring to accelerate! Already at its maximum speed.";
+        cout << "Already at its maximum speed." << endl;
     }
 }
 
@@ -76,7 +85,6 @@ void Car::brake()
     if (speed > 0)
     {
         speed -= 10;
-        cout << "Brake --> Car speed : " << getSpeed() << " Gear : " << getGear() << endl;
     }
     else
     {
@@ -91,14 +99,12 @@ void Car::startEngine(){
 }
 
 // change the gear when needed
-// gear can be shifted between 1 and 5
+// gear can be shifted between 1 and 8 in racing cars
 void Car::shift(int newGear)
 {
-    if (newGear >= 1 && newGear <= 5)
+    if (newGear >= 1 && newGear <= 8)
     {
         gear = newGear;
-
-        cout << "Gear has shifted to " << gear << endl;
     }
     else
     {

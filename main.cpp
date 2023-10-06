@@ -8,7 +8,6 @@ using namespace std;
 
 int main()
 {
-    const int totalCars = 4;
     vector<Car *> cars;
 
     Car *car1 = new Car("Hyundai", "Veloster N TCR");
@@ -25,7 +24,7 @@ int main()
     cars.push_back(car4);
 
     // display car information for each car
-    for (int carNum = 0; carNum < totalCars; carNum++)
+    for (int carNum = 0; carNum < cars.size(); carNum++)
     {
         cout << "Car " << (carNum + 1) << " details:" << endl;
         cout << "Brand: " << cars[carNum]->brand << endl
@@ -37,32 +36,52 @@ int main()
         cars[carNum]->startEngine();
     }
 
-    cout << "All car engines started with gear set to 1!" << endl;
+    cout << "Launching all the cars! Gear set to 1!" << endl;
 
     int racingTracks = 5;
 
     for (int track = 1; track <= racingTracks; track++)
     {
-        cout << "Track " << track << endl;
+        cout << endl
+             << "------------- Track " << track << endl;
 
         // accelerate the car
-        for (int carNum = 0; carNum < totalCars; carNum++)
+        for (int carNum = 0; carNum < cars.size(); carNum++)
         {
-            cars[carNum]->pedal();
-            cars[carNum]->pedal();
+            if (track == 2)
+            {
+                cars[carNum]->shift(5);
+                cars[carNum]->pedal();
+                cars[carNum]->pedal();
+            }
+            cout << cars[carNum]->model << " accelerating. ";
+
+            // car pedal's 3 times to reach top speed
+            int pedals = 1;
+            while (pedals <= 3)
+            {
+                cars[carNum]->pedal();
+                pedals += 1;
+            }
+            cout << "Car Speed: " << cars[carNum]->getSpeed() << " mph Gear: " << cars[carNum]->getGear() << endl;
 
             // all the cars change their gear to 5 by the time they reach track 2
-            if(track==2){
-                cars[carNum]->shift(5);
-            }
         }
 
-        // randomly brake a car
-        int b = rand() % 4;
-        cars[b]->brake();
+        // randomly brake a car, shift the gear and accelerate
+        int randomCar = 1;
+        while (track >= 2 && randomCar <= 2)
+        {
+            int randomIndex = rand() % 4;
+            cars[randomIndex]->brake();
+            cars[randomIndex]->shift(8);
+            cars[randomIndex]->pedal();
+            cout << cars[randomIndex]->model << " is braking. Shifted gear to " << cars[randomIndex]->getGear() << " Car speed: " << cars[randomIndex]->getSpeed() << "mph" << endl;
+            randomCar += 1;
+        }
     }
 
-    for (int carNum = 0; carNum < totalCars; carNum++)
+    for (int carNum = 0; carNum < cars.size(); carNum++)
     {
         delete cars[carNum];
     }
